@@ -41,6 +41,8 @@ class EventsAPIManager:
 
     def get_records_for_cursor(self, cursor):
         data = self.make_request("events.json?cursor={}".format(cursor), data="").json()
+        with open('cursor_data.csv', 'w') as f:
+            json.dump(data, f)
         return data
 
     def make_request(self, endpoint: str, data: Dict[str, Any]=None, params: Dict[str, Any]=None):
